@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <script src="{{ STATIC_URL }}js/bootstrap.js"></script>
+    {{ form.media }}
+    <title>CICU Image Crop ajax Uploader</title>
+</head>
+<body>
+<form id="testFormCicu" action="" method="POST">
+{% csrf_token %}
+{{ form.as_table }}
+<input id="submit" type="submit" value="Submit">
+</form>
+
+<script>
+    $(function() {
+        CicuWidget.autoDiscover();
+    });
+</script>
+</body>
+</html>
