@@ -14,9 +14,11 @@ It works with jQuery = 1.8.3 and twitter bootstrap.
 Screenshot:
 
 #. Modal window with upload button:
+
 .. image:: https://lh4.googleusercontent.com/9B-FZ7bxcSM593Bve4moiMINkWZzoxnwmqXxYiCDwcSldGuALRd21EmM8Cnog-bIGQ=w1600
 
 #. Modal window with crop area:
+
 .. image:: https://lh3.googleusercontent.com/B5DReft6SG3k7r-RmPHSuuzivrZSs5Y58Jg0JLhabWCOfm9ItsafOHY7IQz2VNVezQ=w1600
 
 #. Form with preview
