@@ -6,7 +6,7 @@ clean-image-crop-uploader (CICU)
 (by `twitter bootstrap <http://twitter.github.com/bootstrap/javascript.html#modals>`_) the image can be uploaded and croped.
 Second one, you can see the image cropping preview in the form and finally submit the result.
 
-``clean-image-crop-uploader`` is perfect when you use an ImageField on your model where is necessary to have a specific . It's easy to configure and to use.
+``clean-image-crop-uploader`` is perfect when you use an ImageField on your model where is necessary to have a specific portion of image. It's easy to configure and to use.
 You can use different configurations , with fixed aspect ratio or minimal image size.
 
 It works with jQuery = 1.8.3 and twitter bootstrap.
