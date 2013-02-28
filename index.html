@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=640" />
+
+    <link rel="stylesheet" href="stylesheets/core.css" media="screen"/>
+    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)"/>
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+
+    <script type="text/javascript" src="javascripts/modernizr.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#main_content').headsmart()
+      })
+    </script>
+    <title>Clean-image-crop-uploader by asaglimbeni</title>
+  </head>
+
+  <body>
+    <a id="forkme_banner" href="https://github.com/asaglimbeni/clean-image-crop-uploader">View on GitHub</a>
+    <div class="shell">
+
+      <header>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <h1>Clean-image-crop-uploader</h1>
+            <h2>Clean Image Crop Uploader (CICU) provides AJAX file upload and image CROP functionalities for ImageFields with a simple widget replacement in the form. It use Modal from twitter-bootstrap.</h2>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+      </header>
+
+      <section id="downloads">
+        <span class="inner">
+          <a href="https://github.com/asaglimbeni/clean-image-crop-uploader/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/asaglimbeni/clean-image-crop-uploader/tarball/master" class="tgz"><em>download</em> .TGZ</a>
+        </span>
+      </section>
+
+
+      <span class="banner-fix"></span>
+
+
+      <section id="main_content">
+        <h1>clean-image-crop-uploader (CICU)</h1>
+
+<p><code>clean-image-crop-uploader</code> is a django widget to upload an image via Ajax and crop it using <code>Jcrop
+&lt;https://github.com/tapmodo/Jcrop&gt;</code>_. It provides a simple workflow: first one, using modal,
+(by <code>twitter bootstrap &lt;http://twitter.github.com/bootstrap/javascript.html#modals&gt;</code>_) the image can be uploaded and croped.
+Second one, you can see the image cropping preview in the form and finally submit the result.</p>
+
+<p><code>clean-image-crop-uploader</code> is perfect when you use an ImageField on your model where is necessary to have a specific . It's easy to configure and to use.
+You can use different configurations , with fixed aspect ratio or minimal image size.</p>
+
+<p>It works with jQuery = 1.8.3 and twitter bootstrap.</p>
+
+<p>Screenshot:</p>
+
+<h1>. Modal window with upload button:</h1>
+
+<p>.. image:: http://</p>
+
+<h1>. Modal window with crop area:</h1>
+
+<p>.. image:: http://</p>
+
+<h1>. Form with preview</h1>
+
+<p>.. image:: http://</p>
+
+<h2>Installation</h2>
+
+<h1>. Install django-image-cropping using pip. For example::</h1>
+
+<pre><code>pip install clean-image-crop-uploader
+</code></pre>
+
+<h1>. Add <code>south</code> and <code>cicu</code> to your INSTALLED_APPS.</h1>
+
+<h1>. run migrate commando to your django project::</h1>
+
+<pre><code>python manage.py migrate
+</code></pre>
+
+<h2>Dependencies</h2>
+
+<ul>
+<li>jQuery = 1.8.3</li>
+<li>Twitter-Bootstrap</li>
+</ul><h2>Configuration</h2>
+
+<h1>. Create your model-form and set  CicuUploaderInput widget to your imageField  ::</h1>
+
+<pre><code>from cicu.widgets import CicuUploderInput
+
+class yourCrop(forms.ModelForm):
+    class Meta:
+        model = yourModel
+        cicuOptions = {
+            'ratioWidth': '600',       #fix-width ratio, default 0
+            'ratioHeight':'400',       #fix-height ratio , default 0
+            'sizeWarning': 'False',    #if True the crop selection have to respect minimal ratio size defined above. Default 'False'
+        }
+        widgets = {
+            'image': CicuUploderInput(options=cicuOptions)
+        }
+</code></pre>
+
+<h1>. Download <code>twitter bootstrap &lt;http://twitter.github.com/bootstrap/&gt;</code>_  to your static file folder.</h1>
+
+<h1>. Add in your form template links to jquery, bootstrap, form.media::</h1>
+
+<pre><code>&lt;head&gt;
+....
+    &lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"&gt;&lt;/script&gt;
+    &lt;link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet" type="text/css"/&gt;
+    &lt;script src="{{ STATIC_URL }}js/bootstrap.js"&gt;&lt;/script&gt;
+    {{ form.media }}
+
+....
+&lt;/head&gt;
+</code></pre>
+
+<h2>Run the example</h2>
+
+<p>To run the example inside this package follow these commands::</p>
+
+<pre><code>&gt; cd ./example/
+&gt; python manage.py syncdb
+&gt; python manage.py migrate # only if you use South!!!
+&gt; python manage.py runserver domain:8000
+</code></pre>
+
+<p>Go to examples :</p>
+
+<h1>. Free crop : <a href="http://domain:8000/cicu-freecrop/">http://domain:8000/cicu-freecrop/</a>
+</h1>
+
+<h1>. Fixed aspect ratio: <a href="http://domain:8000/cicu-fixedratio/">http://domain:8000/cicu-fixedratio/</a>
+</h1>
+
+<h1>. Fixed aspect ratio with minimal size: <a href="http://domain:8000/cicu-warningsize/">http://domain:8000/cicu-warningsize/</a>
+</h1>
+      </section>
+
+      <footer>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <p>this project by <a href="https://github.com/asaglimbeni">asaglimbeni</a> can be found on <a href="https://github.com/asaglimbeni/clean-image-crop-uploader">GitHub</a></p>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+        <p>Generated with <a href="http://pages.github.com">GitHub Pages</a> using Merlot</p>
+        <span class="octocat"></span>
+      </footer>
+
+    </div>
+
+    
+  </body>
+</html>
