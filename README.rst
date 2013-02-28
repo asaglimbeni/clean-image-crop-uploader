@@ -14,14 +14,14 @@ It works with jQuery = 1.8.3 and twitter bootstrap.
 Screenshot:
 
 #. Modal window with upload button:
-.. image:: http://
+.. image:: https://lh4.googleusercontent.com/9B-FZ7bxcSM593Bve4moiMINkWZzoxnwmqXxYiCDwcSldGuALRd21EmM8Cnog-bIGQ=w1600
 
 #. Modal window with crop area:
-.. image:: http://
+.. image:: https://lh3.googleusercontent.com/B5DReft6SG3k7r-RmPHSuuzivrZSs5Y58Jg0JLhabWCOfm9ItsafOHY7IQz2VNVezQ=w1600
 
 #. Form with preview
 
-.. image:: http://
+.. image:: https://lh3.googleusercontent.com/ZaatdpVsuDsHeA8h9-Q36Ao9BFYw7VbBNOUs3Oo1JhG0qG8xRNEm5Nq0LjS67tYPuw=w1600
 
 Installation
 ------------
@@ -87,9 +87,13 @@ To run the example inside this package follow these commands::
     > python manage.py runserver domain:8000
 
 Go to examples :
+
 #. Free crop : <http://domain:8000/cicu-freecrop/>
+
 #. Fixed aspect ratio: <http://domain:8000/cicu-fixedratio/>
+
 #. Fixed aspect ratio with minimal size: <http://domain:8000/cicu-warningsize/>
+
 
 
 
