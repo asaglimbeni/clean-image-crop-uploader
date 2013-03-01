@@ -15,15 +15,15 @@ Screenshot:
 
 #. Modal window with upload button:
 
-.. image:: https://lh4.googleusercontent.com/9B-FZ7bxcSM593Bve4moiMINkWZzoxnwmqXxYiCDwcSldGuALRd21EmM8Cnog-bIGQ=w1600
+.. image:: http://asaglimbeni.github.com/clean-image-crop-uploader/images/screenshot1.jpg
 
 #. Modal window with crop area:
 
-.. image:: https://lh3.googleusercontent.com/B5DReft6SG3k7r-RmPHSuuzivrZSs5Y58Jg0JLhabWCOfm9ItsafOHY7IQz2VNVezQ=w1600
+.. image:: http://asaglimbeni.github.com/clean-image-crop-uploader/images/screenshot2.jpg
 
 #. Form with preview
 
-.. image:: https://lh3.googleusercontent.com/ZaatdpVsuDsHeA8h9-Q36Ao9BFYw7VbBNOUs3Oo1JhG0qG8xRNEm5Nq0LjS67tYPuw=w1600
+.. image:: http://asaglimbeni.github.com/clean-image-crop-uploader/images/screenshot3.jpg
 
 Installation
 ------------
