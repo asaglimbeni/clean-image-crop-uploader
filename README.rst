@@ -46,6 +46,9 @@ Dependencies
 
 Configuration
 -------------
+#. Add into url.py ::
+
+    (r'^ajax-upload/', include('startproject.cicu.urls'))
 
 #. Create your model-form and set  CicuUploaderInput widget to your imageField  ::
 
