@@ -94,6 +94,12 @@ You can use different configurations , with fixed aspect ratio or minimal image 
 
 <ul>
 <li>
+<p>Add into url.py::</p>
+
+<pre><code>(r'^ajax-upload/', include('startproject.cicu.urls'))
+</code></pre>
+</li>
+<li>
 <p>Create your model-form and set  CicuUploaderInput widget to your imageField  :</p>
 
 <pre><code>from cicu.widgets import CicuUploderInput
