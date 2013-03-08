@@ -54,7 +54,8 @@ class CicuUploderInput(forms.ClearableFileInput):
         })
         output = super(CicuUploderInput, self).render(name, value, attrs)
         option = self.optionsInput % self.options
-        return mark_safe(output+option)
+        autoDiscoverScript = "<script>$(function(){CicuWidget.autoDiscover();});</script>"
+        return mark_safe(output+option+autoDiscoverScript)
 
     def value_from_datadict(self, data, files, name):
         # If a file was uploaded or the clear checkbox was checked, use that.

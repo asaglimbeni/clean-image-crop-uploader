@@ -4,7 +4,7 @@ from distutils.core import setup
 from setuptools import setup, find_packages
 
 setup(name = "clean-image-crop-uploader",
-    version = "0.2.1",
+    version = "0.2.2",
     description = "Clean Image Crop Uploader (CICU) provides AJAX file upload and image CROP functionalities for ImageFields with a simple widget replacement in the form. It use Modal from twitter-bootstrap.",
     long_description=open('README.rst').read(),
     author = "asagli",
