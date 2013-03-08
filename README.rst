@@ -89,6 +89,7 @@ To run the example inside this package follow these commands::
     > cd ./example/
     > python manage.py syncdb
     > python manage.py migrate # only if you use South!!!
+    > python manage.py collectstatic
     > python manage.py runserver domain:8000
 
 Go to examples :
