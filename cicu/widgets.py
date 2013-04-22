@@ -12,7 +12,7 @@ class CicuException(Exception):
     pass
 
 
-class CicuUploderInput(forms.ClearableFileInput):
+class CicuUploaderInput(forms.ClearableFileInput):
     template_with_clear = ''  # We don't need this
     template_with_initial = '%(input)s'
     #basic configuration for jcrop from django
@@ -20,22 +20,22 @@ class CicuUploderInput(forms.ClearableFileInput):
 
     def __init__(self, attrs=None, options=None):
         if not options: options = {}
-        super(CicuUploderInput ,self).__init__(attrs)
+        super(CicuUploaderInput , self).__init__(attrs)
 
         #jcrop configuration
         self.options = ()
-        self.options += (options.get('sizeWarning','True'),)
+        self.options += (options.get('sizeWarning', 'True'),)
         self.options += (options.get('ratioWidth', ''),)
         self.options += (options.get('ratioHeight', ''),)
         #input message customization and translation
-        self.options += (options.get('modalButtonLabel',_('Upload image') ),)
-        self.options += (options.get('changeButtonText',_('Change Image') ),)
-        self.options += (options.get('sizeAlertMessage',_('Warning: the area selected is little, min size:') ),)
-        self.options += (options.get('sizeErrorMessage',_("Image don't have minimal size ") ),)
-        self.options += (options.get('modalSaveCropMessage',_('Set image') ),)
-        self.options += (options.get('modalCloseCropMessage',_('Close') ),)
-        self.options += (options.get('uploadingMessage',_('Uploading your image') ),)
-        self.options += (options.get('fileUploadLabel',_('Select image from your computer') ),)
+        self.options += (options.get('modalButtonLabel', _('Upload image')),)
+        self.options += (options.get('changeButtonText', _('Change Image')),)
+        self.options += (options.get('sizeAlertMessage', _('Warning: The area selected is too small.  Min size:')),)
+        self.options += (options.get('sizeErrorMessage', _("Image doesn't meet the minimum size requirements ")),)
+        self.options += (options.get('modalSaveCropMessage', _('Set image')),)
+        self.options += (options.get('modalCloseCropMessage', _('Close')),)
+        self.options += (options.get('uploadingMessage', _('Uploading your image')),)
+        self.options += (options.get('fileUploadLabel', _('Select image from your computer')),)
 
     def render(self, name, value, attrs=None):
         attrs = attrs or {}
@@ -45,21 +45,21 @@ class CicuUploderInput(forms.ClearableFileInput):
             filename = ''
         attrs.update({
             'class': attrs.get('class', '') + 'ajax-upload',
-            'data-filename': filename,  # This is so the javascript can get the actual value
+            'data-filename': filename, # This is so the javascript can get the actual value
             'data-required': self.is_required or '',
             'data-upload-url': reverse('ajax-upload'),
             'data-crop-url': reverse('cicu-crop'),
             'type': 'file',
             'accept' : 'image/*',
         })
-        output = super(CicuUploderInput, self).render(name, value, attrs)
+        output = super(CicuUploaderInput, self).render(name, value, attrs)
         option = self.optionsInput % self.options
         autoDiscoverScript = "<script>$(function(){CicuWidget.autoDiscover();});</script>"
-        return mark_safe(output+option+autoDiscoverScript)
+        return mark_safe(output + option + autoDiscoverScript)
 
     def value_from_datadict(self, data, files, name):
         # If a file was uploaded or the clear checkbox was checked, use that.
-        file = super(CicuUploderInput, self).value_from_datadict(data, files, name)
+        file = super(CicuUploaderInput, self).value_from_datadict(data, files, name)
         if file is not None:  # super class may return a file object, False, or None
             return file  # Default behaviour
         elif name in data:  # This means a file id was specified in the POST field
@@ -68,7 +68,7 @@ class CicuUploderInput(forms.ClearableFileInput):
                 img = Image.open(uploaded_file.file.path, mode='r')
                 width, height = img.size
                 if (width < self.options[1] or height < self.options[2]) and self.options[0] == 'True':
-                    raise Exception('Image don\'t have correct ratio %sx%s'  % (self.options[1], self.options[2]))
+                    raise Exception('Image don\'t have correct ratio %sx%s' % (self.options[1], self.options[2]))
                 return uploaded_file.file
             except Exception, e:
                 return None
@@ -81,4 +81,4 @@ class CicuUploderInput(forms.ClearableFileInput):
             "cicu/js/cicu-widget.js",
             )
 
-        css = {'all': ("cicu/css/jquery.Jcrop.min.css","cicu/css/cicu-widget.css")}
+        css = {'all': ("cicu/css/jquery.Jcrop.min.css", "cicu/css/cicu-widget.css")}

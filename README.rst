@@ -3,7 +3,7 @@ clean-image-crop-uploader (CICU)
 
 ``clean-image-crop-uploader`` is a django widget to upload an image via Ajax and crop it using `Jcrop
 <https://github.com/tapmodo/Jcrop>`_. It provides a simple workflow: first one, using modal,
-(by `twitter bootstrap <http://twitter.github.com/bootstrap/javascript.html#modals>`_) the image can be uploaded and croped.
+(by `twitter bootstrap <http://twitter.github.com/bootstrap/javascript.html#modals>`_) the image can be uploaded and cropped.
 Second one, you can see the image cropping preview in the form and finally submit the result.
 
 ``clean-image-crop-uploader`` is perfect when you use an ImageField on your model where is necessary to have a specific portion of image. It's easy to configure and to use.
@@ -52,7 +52,7 @@ Configuration
 
 #. Create your model-form and set  CicuUploaderInput widget to your imageField  ::
 
-    from cicu.widgets import CicuUploderInput
+    from cicu.widgets import CicuUploaderInput
 
     class yourCrop(forms.ModelForm):
         class Meta:
@@ -63,7 +63,7 @@ Configuration
                 'sizeWarning': 'False',    #if True the crop selection have to respect minimal ratio size defined above. Default 'False'
             }
             widgets = {
-                'image': CicuUploderInput(options=cicuOptions)
+                'image': CicuUploaderInput(options=cicuOptions)
             }
 
 #. Download `twitter bootstrap <http://twitter.github.com/bootstrap/>`_  to your static file folder.
