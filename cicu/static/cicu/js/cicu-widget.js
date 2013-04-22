@@ -37,7 +37,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             modalButtonLabel : 'Upload image',
             changeButtonText : 'Change Image',
             sizeAlertMessage : 'Warning: the area selected is little, min size:',
-            sizeErrorMessage : "Image don't have minimal size",
+            sizeErrorMessage : "Image doesn't meet the minimal size requirement",
             modalSaveCropMessage: 'Set image',
             modalCloseCropMessage: 'Close',
             uploadingMessage : 'Uploading your image',

@@ -18,7 +18,7 @@ class freeCrop(forms.ModelForm):
             'sizeWarning': 'False', #if True the crop selection have to respect minimal ratio size defined above.
         }
         widgets = {
-            'image': CicuUploderInput(options=cicuOptions)
+            'image': CicuUploaderInput(options=cicuOptions)
         }
 
 class fixedRatioCrop(forms.ModelForm):
@@ -30,7 +30,7 @@ class fixedRatioCrop(forms.ModelForm):
             'sizeWarning': 'False', #if True the crop selection have to respect minimal ratio size defined above.
         }
         widgets = {
-            'image': CicuUploderInput(options=cicuOptions)
+            'image': CicuUploaderInput(options=cicuOptions)
         }
 
 class warningSizeCrop(forms.ModelForm):
@@ -42,5 +42,5 @@ class warningSizeCrop(forms.ModelForm):
             'sizeWarning': 'True', #if True the crop selection have to respect minimal ratio size defined above.
         }
         widgets = {
-            'image': CicuUploderInput(options=cicuOptions)
+            'image': CicuUploaderInput(options=cicuOptions)
         }
