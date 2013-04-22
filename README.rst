@@ -52,7 +52,7 @@ Configuration
 
 #. Create your model-form and set  CicuUploaderInput widget to your imageField  ::
 
-    from cicu.widgets import CicuUploderInput
+    from cicu.widgets import CicuUploaderInput
 
     class yourCrop(forms.ModelForm):
         class Meta:
@@ -63,7 +63,7 @@ Configuration
                 'sizeWarning': 'False',    #if True the crop selection have to respect minimal ratio size defined above. Default 'False'
             }
             widgets = {
-                'image': CicuUploderInput(options=cicuOptions)
+                'image': CicuUploaderInput(options=cicuOptions)
             }
 
 #. Download `twitter bootstrap <http://twitter.github.com/bootstrap/>`_  to your static file folder.
