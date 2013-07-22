@@ -5,3 +5,4 @@ recursive-include cicu *.py *.txt *.rst *.js *.css
 recursive-include cicu/locale *.po *.mo
 recursive-include cicu/static *.py *.txt *.js *.css
 recursive-include cicu/migrations *.py *.txt *.js *.css
+
