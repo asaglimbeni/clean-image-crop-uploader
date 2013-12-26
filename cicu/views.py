@@ -58,7 +58,7 @@ def crop(request):
             croppedImage.save(pathToFile)
 
             new_file = UploadedFile()
-            f = open(pathToFile, mode='r')
+            f = open(pathToFile, mode='rb')
             new_file.file.save(uploaded_file.file.name, File(f))
             f.close()
 
@@ -69,5 +69,5 @@ def crop(request):
 
             return HttpResponse(simplejson.dumps(data))
 
-    except Exception, e:
+    except Exception:
         return HttpResponseBadRequest(simplejson.dumps({'errors': 'illegal request'}))
