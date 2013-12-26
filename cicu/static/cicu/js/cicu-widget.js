@@ -33,7 +33,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     var console = global.console || {log: function() {}};
 
     var CicuWidget = global.CicuWidget = function(element, options) {
-        if(! $(this).data('has-cicu-widget')){
+        if(! $(element).hasClass('has-cicu-widget')){
             this.options = {
                 modalButtonLabel : 'Upload image',
                 changeButtonText : 'Select a different image',
@@ -56,7 +56,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             this.$element = $(element);
             $('label[for='+this.$element.attr('id')+']:first').removeAttr('for');
             this.initialize();
-            $(this).data('has-cicu-widget', true);
+            $(element).addClass('has-cicu-widget');
          }
     };
 
@@ -281,7 +281,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         var cicuOptions = $( '#cicu-options');
         options =  cicuOptions.data();
         cicuOptions.remove();
-        $('input[type="file"].ajax-upload').each(function(index, element) {
+        $('input[type="file"].ajax-upload:not(.has-cicu-widget)').each(function(index, element) {
             new CicuWidget(element, options);
         });
     };
@@ -321,7 +321,7 @@ var image_cropping = {
                 $image_input.hide().parents('div.form-row:first').hide();
             }
 
-            var image_id = $this.attr('id') + '-image',
+            var image_id = ajaxUploadWidget.name + '-' + $this.attr('name') + '-image',
                 org_width = $image_input.data('org-width'),
                 org_height = $image_input.data('org-height'),
                 min_width = $this.data('width'),
