@@ -33,28 +33,31 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     var console = global.console || {log: function() {}};
 
     var CicuWidget = global.CicuWidget = function(element, options) {
-        this.options = {
-            modalButtonLabel : 'Upload image',
-            changeButtonText : 'Change Image',
-            sizeAlertMessage : 'Warning: the area selected is little, min size:',
-            sizeErrorMessage : "Image doesn't meet the minimal size requirement",
-            modalSaveCropMessage: 'Set image',
-            modalCloseCropMessage: 'Close',
-            uploadingMessage : 'Uploading your image',
-            fileUploadLabel : 'Select image from your computer',
-            sizeWarning : 'True',
-            ratioWidth :'800',
-            ratioHeight :'600',
-            onUpload: null,
-            onComplete: null,
-            onError: null,
-            onRemove: null,
-            onCrop: null
-        };
-        $.extend(this.options, options);
-        this.$element = $(element);
-        $('label[for='+this.$element.attr('id')+']:first').removeAttr('for');
-        this.initialize();
+        if(! $(this).data('has-cicu-widget')){
+            this.options = {
+                modalButtonLabel : 'Upload image',
+                changeButtonText : 'Select a different image',
+                sizeAlertMessage : 'Warning: the area selected is too small, min size:',
+                sizeErrorMessage : "Image doesn't meet the minimal size requirement",
+                modalSaveCropMessage: 'Set image',
+                modalCloseCropMessage: 'Close',
+                uploadingMessage : 'Uploading your image',
+                fileUploadLabel : 'Select image from your computer',
+                sizeWarning : 'True',
+                ratioWidth :'800',
+                ratioHeight :'600',
+                onUpload: null,
+                onComplete: null,
+                onError: null,
+                onRemove: null,
+                onCrop: null
+            };
+            $.extend(this.options, options);
+            this.$element = $(element);
+            $('label[for='+this.$element.attr('id')+']:first').removeAttr('for');
+            this.initialize();
+            $(this).data('has-cicu-widget', true);
+         }
     };
 
     CicuWidget.prototype.DjangoCicuError = function(message) {
@@ -72,24 +75,25 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     CicuWidget.prototype.initialize = function() {
         var self = this;
         this.name = this.$element.attr('name');
-        this.$modalButton = $('<a href="#uploadModal" role="button" class="btn upload-btn" data-toggle="modal">'+this.options['modalButtonLabel']+'</a>');
+        this.modalId = this.name + '-uploadModal';
+        this.$modalButton = $('<a href="#' + this.modalId +'" role="button" class="btn upload-btn" data-toggle="modal">'+this.options['modalButtonLabel']+'</a>');
         this.$croppedImagePreview = $('<div class="cropped-imag-preview"><img src="'+this.$element.data('filename')+'"/></div>');
         this.$croppedImagePreview.append(this.$modalButton);
         this.$element.after(this.$croppedImagePreview);
 
-        this.$modalWindow = $('<div id="uploadModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">' +
-            '<div id="uploadModalBody" class="modal-body image-body-modal">' +
+        this.$modalWindow = $('<div id="' + this.modalId + '" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">' +
+            '<div class="modal-body image-body-modal">' +
             '' +
             '</div>' +
             '<div class="modal-footer">' +
             '<button class="btn" data-dismiss="modal" aria-hidden="true">'+this.options.modalCloseCropMessage+'</button>' +
-            '<button id="modal-set-image-button" class="btn btn-primary disabled">'+this.options.modalSaveCropMessage+'</button>' +
+            '<button class="modal-set-image-button btn btn-primary disabled">'+this.options.modalSaveCropMessage+'</button>' +
             '</div>' +
             '</div>');
 
         this.$element.after(this.$modalWindow);
-        this.$uploadModalBody = $('#uploadModalBody');
-        this.$warningSize = $('<div id="warning-size-message" class="alert alert-error hide"></div>');
+        this.$uploadModalBody = this.$modalWindow.children('div.modal-body');
+        this.$warningSize = $('<div class="warning-size-message alert alert-error hide"></div>');
 
         this.$uploadModalBody.before(this.$warningSize);
         // Create a hidden field to contain our uploaded file name
@@ -108,12 +112,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             self.upload();
         });
         this.$uploadButton = $('<div class="fileupload fileupload-new" data-provides="fileupload"><span class="btn btn-file">' +
-            '<span id="file-upload-label" class="fileupload-new" data-loading-text="Uploading your image...">'+this.options.fileUploadLabel+'</span></span>'+
+            '<span class="fileupload-label fileupload-new" data-loading-text="Uploading your image...">'+this.options.fileUploadLabel+'</span></span>'+
             '</div>');
         this.$uploadModalBody.append(this.$uploadButton);
-        this.$fileUploadLabel = $('#file-upload-label');
-        $( '.btn-file' ).append(this.$element);
-        this.$modalSetImageButton = $('#modal-set-image-button');
+        this.$fileUploadLabel = this.$uploadButton.find('.fileupload-label');
+        this.$uploadButton.children('.btn-file').append(this.$element);
+        this.$modalSetImageButton = this.$modalWindow.find('button.modal-set-image-button');
         this.$modalSetImageButton.on( 'click' , function(){
             if (!$(this).hasClass('disabled')){
                 self.setCrop();
@@ -247,7 +251,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             this.$previewArea.empty();
             this.$previewArea.append(this.generateFilePreview(filename));
             image_cropping.init(this);
-            this.$cropping = $('#id_cropping' );
+            this.$cropping = this.$previewArea.find('input[name=cropping]');
             this.$uploadModalBody.removeClass( 'image-body-modal' );
             this.$previewArea.show();
 
@@ -264,7 +268,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         var $self = this;
         $.each(['jpg', 'jpeg', 'png', 'gif'], function(i, ext) {
             if(filename.toLowerCase().slice(-ext.length) == ext) {
-                var crop_input = '<input data-size-warning="'+$self.options.sizeWarning+'"  data-width="'+$self.options.ratioWidth+'" data-height="'+$self.options.ratioHeight+'"  data-allow-fullsize="false" name="cropping" maxlength="255" value="300,100,600,600" class="image-ratio" data-image-field="image_field" id="id_cropping" data-adapt-rotation="false" type="text" data-my-name="cropping" style="display: none;" />';
+                var crop_input = '<input data-size-warning="'+$self.options.sizeWarning+'"  data-width="'+$self.options.ratioWidth+'" data-height="'+$self.options.ratioHeight+'"  data-allow-fullsize="false" name="cropping" maxlength="255" value="300,100,600,600" class="image-ratio" data-image-field="image_field" data-adapt-rotation="false" type="text" data-my-name="cropping" style="display: none;" />';
                 output += '<input data-org-width="'+width+'" data-org-height="'+height+'" data-field-name="image_field" class="crop-thumb hide" src="'+filename+'"  data-thumbnail-url="'+filename+'" />' + crop_input;
                 return false;
             }
@@ -282,6 +286,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         });
     };
 }).call(this);
+
 
 /******************/
 /**IMAGE CROPPING**/
@@ -456,7 +461,7 @@ var image_cropping = {
             this.$ajaxUploadWidget.$modalSetImageButton.addClass('disabled');
         } else {
             $jcrop_holder.removeClass('size-warning');
-            $('#warning-size-message').hide();
+            this.$ajaxUploadWidget.$warningSize.hide();
             this.$ajaxUploadWidget.$modalSetImageButton.removeClass('disabled');
         }
     }
