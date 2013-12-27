@@ -11,7 +11,7 @@ setup(name = "clean-image-crop-uploader",
     author_email = "alfredo.saglimbeni@gmail.com",
     url = "",
     packages = find_packages(),
-    include_package_data=False,
+    include_package_data=True,
     install_requires = [
         'PIL==1.1.7','django>=1.4.3','south>=0.7.6'
         ],

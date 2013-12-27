@@ -69,5 +69,5 @@ def crop(request):
 
             return HttpResponse(simplejson.dumps(data))
 
-    except Exception, e:
+    except Exception:
         return HttpResponseBadRequest(simplejson.dumps({'errors': 'illegal request'}))
