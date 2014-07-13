@@ -13,7 +13,7 @@ setup(name = "clean-image-crop-uploader",
     packages = find_packages(),
     include_package_data=True,
     install_requires = [
-        'PIL==1.1.7','django>=1.4.3','south>=0.7.6'
+        'Pillow','django>=1.4.3','south>=0.7.6'
         ],
     classifiers = [
         'Development Status :: 4 - Beta',
