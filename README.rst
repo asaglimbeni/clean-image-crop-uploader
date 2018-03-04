@@ -2,9 +2,9 @@ clean-image-crop-uploader (CICU)
 ================================
 .. image:: https://d2weczhvl823v0.cloudfront.net/asaglimbeni/django-datetime-widget/trend.png
     :target: https://bitdeli.com/free
-.. image:: https://pypip.in/v/clean-image-crop-uploader/badge.png
+.. image:: https://img.shields.io/pypi/v/clean-image-crop-uploader.svg
     :target: https://crate.io/packages/clean-image-crop-uploader
-.. image:: https://pypip.in/d/clean-image-crop-uploader/badge.png
+.. image:: https://img.shields.io/pypi/dm/clean-image-crop-uploader.svg
     :target: https://crate.io/packages/clean-image-crop-uploader
     
 ``clean-image-crop-uploader`` is a django widget to upload an image via Ajax and crop it using `Jcrop
